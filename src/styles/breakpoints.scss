@@ -1,0 +1,8 @@
+$min-mobile-width: 10px;
+$max-mobile-width: 667px;
+
+@mixin mobile-device {
+	@media (min-width: $min-mobile-width) and (max-width: $max-mobile-width) {
+		@content;
+	}
+}
