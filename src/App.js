@@ -6,7 +6,9 @@ import Layout from './containers/Layout/Layout';
 const App = (props) => {
 	return (
 		<div className={classes.App}>
-			<Layout />
+			<Layout>
+				<h1>SAPEEEE</h1>
+			</Layout>
 		</div>
 	);
 	// return (

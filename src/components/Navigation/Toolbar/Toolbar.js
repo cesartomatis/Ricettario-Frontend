@@ -1,20 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import classes from './Toolbar.module.scss';
-import BurgerIcon from '../../UI/BurgerIcon/BurgerIcon';
+import MenuToggle from '../SideMenu/MenuToggle/MenuToggle';
 
 const Toolbar = (props) => {
-	const [burgerOpen, setBurgerOpen] = useState(false);
 	return (
 		<header className={classes.Toolbar}>
 			<div className={classes.MenuIcon}>
-				<BurgerIcon
-					burgerClicked={() => {
-						setBurgerOpen(!burgerOpen);
-						console.log('Burgerclicked', burgerOpen);
-					}}
-					open={burgerOpen}
-				/>
+				<MenuToggle burgerClicked={props.clicked} open={props.menuOpen} />
 			</div>
 			<div className={classes.Logo}>
 				<p className={classes.Title}></p>
