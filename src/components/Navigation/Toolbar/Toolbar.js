@@ -2,6 +2,7 @@ import React from 'react';
 
 import classes from './Toolbar.module.scss';
 import MenuToggle from '../SideMenu/MenuToggle/MenuToggle';
+import NavigationItems from '../NavigationItems/NavigationItems';
 
 const Toolbar = (props) => {
 	return (
@@ -12,11 +13,9 @@ const Toolbar = (props) => {
 			<div className={classes.Logo}>
 				<p className={classes.Title}></p>
 			</div>
-			<div className={classes.Options}>
-				<i className={`material-icons ${classes.OptionsIcon}`}>
-					account_circle
-				</i>
-			</div>
+			<nav className={classes.DesktopOnly}>
+				<NavigationItems />
+			</nav>
 		</header>
 	);
 };

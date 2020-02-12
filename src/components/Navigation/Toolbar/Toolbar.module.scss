@@ -52,20 +52,10 @@
 			}
 		}
 	}
-	.Options {
-		display: flex;
-		flex-flow: row;
-		align-items: center;
-		justify-content: center;
+	.DesktopOnly {
+		display: block;
 		@include mobile-device {
 			display: none;
-		}
-		.OptionsIcon {
-			color: $background;
-			font-size: 2rem;
-			&:hover {
-				cursor: pointer;
-			}
 		}
 	}
 }

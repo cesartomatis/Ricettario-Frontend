@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 
 import classes from './SideMenu.module.scss';
 import Backdrop from '../../UI/Backdrop/Backdrop';
+import NavigationItems from '../NavigationItems/NavigationItems';
 
 const SideMenu = (props) => {
 	const menuClasses = [classes.SideMenu];
@@ -15,8 +16,7 @@ const SideMenu = (props) => {
 			<Backdrop show={props.open} clicked={props.closed} />
 			<div className={menuClasses.join(' ')} onClick={props.closed}>
 				<nav>
-					<h1>ACCOUNT</h1>
-					<h1>SARASA</h1>
+					<NavigationItems />
 				</nav>
 			</div>
 		</Fragment>
