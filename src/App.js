@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import classes from './App.module.scss';
 import Layout from './containers/Layout/Layout';
+import { I18nContext } from './i18n/index';
 
 const App = (props) => {
+	const { translate } = useContext(I18nContext);
 	return (
 		<div className={classes.App}>
 			<Layout>
-				<h1>SAPEEEE</h1>
+				<h1>{translate('test')}</h1>
 			</Layout>
 		</div>
 	);

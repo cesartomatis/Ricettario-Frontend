@@ -4,7 +4,6 @@ import classes from './MenuToggle.module.scss';
 
 const MenuToggle = (props) => {
 	const burgerClasses = [classes.burger, classes['burger-rotate']];
-	console.log('props.open', props.open);
 	if (props.open) {
 		burgerClasses.push(classes.open);
 	}
