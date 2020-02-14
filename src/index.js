@@ -7,14 +7,15 @@ import './index.scss';
 import App from './App';
 import { I18nContextProvider } from './i18n/index';
 
-ReactDOM.render(
+const app = (
 	<I18nContextProvider>
 		<BrowserRouter>
 			<App />
 		</BrowserRouter>
-	</I18nContextProvider>,
-	document.getElementById('root')
+	</I18nContextProvider>
 );
+
+ReactDOM.render(app, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -1,10 +1,11 @@
 {
+	"---AUTH---": "",
 	"ACCOUNT": "Cuenta",
 	"EMAIL": "Email",
 	"PASSWORD": "Contraseña",
 	"SIGNIN": "Ingresar",
 	"SIGNUP": "Registrarse",
-	"OR": "o",
+	"OR": "|",
 	"NAME": "Nombre(s)",
 	"LASTNAME": "Apellido(s)"
 }

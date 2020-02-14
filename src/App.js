@@ -1,8 +1,9 @@
 import React, { Suspense } from 'react';
-import { Route, withRouter, Switch } from 'react-router-dom';
+import { Route, withRouter, Switch, Redirect } from 'react-router-dom';
 
 import classes from './App.module.scss';
 import Layout from './containers/Layout/Layout';
+import Home from './containers/Home/Home';
 
 const Auth = React.lazy(() => import('./containers/Auth/Auth'));
 
@@ -13,12 +14,14 @@ const App = (props) => {
 				<Switch>
 					<Route
 						path="/auth"
-						render={() => (
+						render={(props) => (
 							<Suspense fallback={<p>LOADING...</p>}>
-								<Auth />
+								<Auth {...props} />
 							</Suspense>
 						)}
 					/>
+					<Route path="/" exact component={Home} />
+					<Redirect to="/" />
 				</Switch>
 			</Layout>
 		</div>

@@ -7,17 +7,15 @@ if (userLang.includes('-')) {
 	langJSON = userLang.split('-')[0];
 }
 
+let translate;
+try {
+	translate = require(`./${langJSON}.json`);
+} catch {
+	translate = require('./en.json');
+}
+
 // This function will lazy load the language json file to be used by the context
-const getTranslate = (langCode) => (key) => {
-	let lang;
-	try {
-		lang = require(`./${langCode}.json`);
-	} catch {
-		lang = require('./en.json');
-	} finally {
-		return lang[key] || key;
-	}
-};
+const getTranslate = (langCode) => (key) => translate[key] || key;
 
 /* We will have two things in our context state, 
 langCode will be the current language of the page

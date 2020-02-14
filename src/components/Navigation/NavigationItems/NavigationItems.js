@@ -6,9 +6,14 @@ import { I18nContext } from '../../../i18n/index';
 
 const NavigationItems = (props) => {
 	const { translate } = useContext(I18nContext);
+
 	return (
 		<div className={classes.Options}>
-			<NavigationItem icon="account_circle" text={translate('ACCOUNT')} />
+			<NavigationItem
+				icon="account_circle"
+				text={translate('ACCOUNT')}
+				link="/auth"
+			/>
 		</div>
 	);
 };

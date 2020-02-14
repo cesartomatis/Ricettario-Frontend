@@ -1,4 +1,5 @@
 @import '../../styles/variables.scss';
+@import '../../styles/breakpoints.scss';
 
 .Auth {
 	width: 100%;
@@ -11,6 +12,10 @@
 		flex-flow: row;
 		justify-content: center;
 		align-items: center;
+		width: 25%;
+		@include mobile-device {
+			width: 100%;
+		}
 		.Separator {
 			color: $primary;
 		}
