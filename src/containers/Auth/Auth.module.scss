@@ -1,0 +1,18 @@
+@import '../../styles/variables.scss';
+
+.Auth {
+	width: 100%;
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	align-items: center;
+	.AuthSwitch {
+		display: flex;
+		flex-flow: row;
+		justify-content: center;
+		align-items: center;
+		.Separator {
+			color: $primary;
+		}
+	}
+}

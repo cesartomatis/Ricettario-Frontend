@@ -1,0 +1,57 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/breakpoints.scss';
+
+.Input {
+	width: 100%;
+	padding: 10px;
+	box-sizing: border-box;
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	align-items: flex-start;
+}
+
+.InputItem {
+	display: flex;
+	flex-flow: row;
+	justify-content: flex-start;
+	align-items: center;
+	border-bottom: 1px solid $primary;
+}
+
+.Label {
+	font-weight: bold;
+	display: block;
+	margin-bottom: 8px;
+	color: $secondary;
+}
+
+.InputElement {
+	outline: none;
+	border: 0;
+	background-color: $transparent;
+	font: inherit;
+	padding: 6px 10px;
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	color: $primary;
+	height: 37px;
+	@include mobile-device {
+		height: auto;
+	}
+}
+
+.Icon {
+	color: $primary;
+	font-size: 1.2rem;
+	padding: 6px 0;
+}
+
+.InputElement:focus {
+	outline: none;
+}
+
+.Invalid {
+	border-bottom: 1px solid red;
+}

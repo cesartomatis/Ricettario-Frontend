@@ -1,4 +1,10 @@
 {
-	"test": "Probando",
-	"ACCOUNT": "Cuenta"
+	"ACCOUNT": "Cuenta",
+	"EMAIL": "Email",
+	"PASSWORD": "Contraseña",
+	"SIGNIN": "Ingresar",
+	"SIGNUP": "Registrarse",
+	"OR": "o",
+	"NAME": "Nombre(s)",
+	"LASTNAME": "Apellido(s)"
 }

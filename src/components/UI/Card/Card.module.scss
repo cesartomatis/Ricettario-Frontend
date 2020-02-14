@@ -1,0 +1,10 @@
+@import '../../../styles/variables.scss';
+
+.Card {
+	background-color: $secondary;
+	border-radius: 5px;
+	margin: 0;
+	padding: 8px;
+	width: 300px;
+	box-shadow: 2px 2px 2px $black;
+}
