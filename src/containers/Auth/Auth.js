@@ -5,6 +5,7 @@ import Signin from '../../components/Auth/Signin/Signin';
 import Signup from '../../components/Auth/Signup/Signup';
 import Button from '../../components/UI/Button/Button';
 import { I18nContext } from '../../i18n';
+import withErrorHandler from '../../hoc/withErrorHandler';
 
 const Auth = (props) => {
 	const { translate } = useContext(I18nContext);
@@ -39,4 +40,4 @@ const Auth = (props) => {
 	);
 };
 
-export default Auth;
+export default withErrorHandler(Auth);

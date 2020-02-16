@@ -4,6 +4,7 @@ import { Route, withRouter, Switch, Redirect } from 'react-router-dom';
 import classes from './App.module.scss';
 import Layout from './containers/Layout/Layout';
 import Home from './containers/Home/Home';
+import Spinner from './components/UI/Spinner/Spinner';
 
 const Auth = React.lazy(() => import('./containers/Auth/Auth'));
 
@@ -15,7 +16,7 @@ const App = (props) => {
 					<Route
 						path="/auth"
 						render={(props) => (
-							<Suspense fallback={<p>LOADING...</p>}>
+							<Suspense fallback={<Spinner />}>
 								<Auth {...props} />
 							</Suspense>
 						)}

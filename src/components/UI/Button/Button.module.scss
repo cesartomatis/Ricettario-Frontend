@@ -32,3 +32,15 @@
 		color: $success;
 	}
 }
+
+.Modal {
+	background-color: $danger;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 25px;
+	padding: 0px 20px;
+	color: $primary;
+	font-size: 1rem;
+	margin: 0;
+}

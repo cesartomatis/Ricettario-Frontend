@@ -1,9 +1,11 @@
 import React, { useState, useContext } from 'react';
+import { useDispatch } from 'react-redux';
 
 import Input from '../../UI/Input/Input';
 import Button from '../../UI/Button/Button';
 import { checkValidity } from '../../../shared/validations';
 import { I18nContext } from '../../../i18n/index';
+import { login } from '../../../store/actions/index';
 
 const initialState = {
 	email: {
@@ -43,8 +45,13 @@ const Signin = (props) => {
 	const [controls, setControls] = useState(initialState);
 	const [formIsValid, setFormIsValid] = useState(false);
 
+	const dispatch = useDispatch();
+	const onLogin = (email, password) => dispatch(login({ email, password }));
+
 	const submitHandler = (event) => {
 		event.preventDefault();
+		console.log('LOGIN CLICKED', controls.email.value, controls.password.value);
+		onLogin(controls.email.value, controls.password.value);
 	};
 
 	const formElementsArray = [];

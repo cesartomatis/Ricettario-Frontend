@@ -1,9 +1,11 @@
 import React, { useContext, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import Input from '../../UI/Input/Input';
 import Button from '../../UI/Button/Button';
 import { checkValidity } from '../../../shared/validations';
 import { I18nContext } from '../../../i18n/index';
+import { register } from '../../../store/actions/index';
 
 const initialState = {
 	firstName: {
@@ -73,8 +75,18 @@ const Signup = (props) => {
 	const [controls, setControls] = useState(initialState);
 	const [formIsValid, setFormIsValid] = useState(false);
 
+	const dispatch = useDispatch();
+	const onRegister = (firstName, lastName, email, password) =>
+		dispatch(register({ firstName, lastName, email, password }));
+
 	const submitHandler = (event) => {
 		event.preventDefault();
+		onRegister(
+			controls.firstName.value,
+			controls.lastName.value,
+			controls.email.value,
+			controls.password.value
+		);
 	};
 
 	const formElementsArray = [];

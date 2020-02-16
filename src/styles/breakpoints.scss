@@ -1,8 +1,15 @@
 $min-mobile-width: 10px;
 $max-mobile-width: 667px;
+$min-desktop-width: 668px;
 
 @mixin mobile-device {
 	@media (min-width: $min-mobile-width) and (max-width: $max-mobile-width) {
+		@content;
+	}
+}
+
+@mixin desktop {
+	@media (min-width: $min-desktop-width) {
 		@content;
 	}
 }

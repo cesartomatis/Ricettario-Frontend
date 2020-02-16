@@ -1,0 +1,59 @@
+@import '../../../styles/breakpoints.scss';
+@import '../../../styles/variables.scss';
+
+.Modal {
+	position: fixed;
+	z-index: 500;
+	background-color: $primary;
+	width: 70%;
+	border-radius: 3px;
+	box-shadow: 1px 1px 1px black;
+	color: $background;
+	left: 15%;
+	top: 30%;
+	box-sizing: border-box;
+	transition: all 0.3s ease-out;
+	display: flex;
+	flex-flow: column;
+	justify-content: flex-start;
+	align-items: center;
+	@include desktop {
+		width: 500px;
+		left: calc(50% - 250px);
+	}
+	.ModalHeader {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: $danger;
+		width: 100%;
+		height: 33%;
+		border-top-left-radius: 3px;
+		border-top-right-radius: 3px;
+		.ErrorIcon {
+			color: $primary;
+			font-size: 2rem;
+			margin: 10px;
+		}
+	}
+	.ModalBody {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding-bottom: 8px;
+		padding-top: 16px;
+	}
+	.ModalFooter {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding-bottom: 8px;
+		padding-top: 8px;
+		.CloseIcon {
+			font-size: 1rem;
+		}
+		.CloseText {
+			font-size: 0.8rem;
+		}
+	}
+}

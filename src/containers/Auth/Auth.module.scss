@@ -2,20 +2,16 @@
 @import '../../styles/breakpoints.scss';
 
 .Auth {
-	width: 100%;
-	display: flex;
-	flex-flow: column;
-	justify-content: center;
-	align-items: center;
+	display: inline-block;
+	padding: 8px 16px;
+	border-radius: 5px;
+	box-shadow: 0px 0px 7px $black;
 	.AuthSwitch {
-		display: flex;
+		display: inline-flex;
 		flex-flow: row;
 		justify-content: center;
 		align-items: center;
-		width: 25%;
-		@include mobile-device {
-			width: 100%;
-		}
+		width: 100%;
 		.Separator {
 			color: $primary;
 		}

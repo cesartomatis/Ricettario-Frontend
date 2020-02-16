@@ -7,5 +7,7 @@
 	"SIGNUP": "Registrarse",
 	"OR": "|",
 	"NAME": "Nombre(s)",
-	"LASTNAME": "Apellido(s)"
+	"LASTNAME": "Apellido(s)",
+	"---UI---": "",
+	"CLOSE": "Cerrar"
 }

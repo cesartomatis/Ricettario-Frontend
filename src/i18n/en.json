@@ -7,5 +7,7 @@
 	"SIGNUP": "Sign up",
 	"OR": "|",
 	"NAME": "Name(s)",
-	"LASTNAME": "Lastname(s)"
+	"LASTNAME": "Lastname(s)",
+	"---UI---": "",
+	"CLOSE": "Close"
 }
