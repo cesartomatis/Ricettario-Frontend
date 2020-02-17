@@ -7,6 +7,13 @@ const instance = axios.create({
 	}
 });
 
+export const setToken = (token) => {
+	instance.interceptors.request.use((req) => {
+		req.headers.Authorization = token;
+		return req;
+	});
+};
+
 export const httpGet = (url) => {
 	return instance.get(url);
 };

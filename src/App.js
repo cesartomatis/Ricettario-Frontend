@@ -5,8 +5,14 @@ import classes from './App.module.scss';
 import Layout from './containers/Layout/Layout';
 import Home from './containers/Home/Home';
 import Spinner from './components/UI/Spinner/Spinner';
+import { setToken } from './service/base.service';
 
 const Auth = React.lazy(() => import('./containers/Auth/Auth'));
+
+const token = localStorage.getItem('token');
+if (token) {
+	setToken(token);
+}
 
 const App = (props) => {
 	return (
