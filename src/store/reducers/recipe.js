@@ -83,3 +83,30 @@ const getUserRecipesFail = (state, action) => {
 		error: action.error
 	};
 };
+
+const reducer = (state = initialState, action) => {
+	switch (action.type) {
+		case GET_PUBLIC_RECIPES_START:
+			return getPublicRecipesStart(state, action);
+		case GET_PUBLIC_RECIPES_SUCCESS:
+			return getPublicRecipesSuccess(state, action);
+		case GET_PUBLIC_RECIPES_FAIL:
+			return getPublicRecipesFail(state, action);
+		case GET_ALL_RECIPES_START:
+			return getAllRecipesStart(state, action);
+		case GET_ALL_RECIPES_SUCCESS:
+			return getAllRecipesSuccess(state, action);
+		case GET_ALL_RECIPES_FAIL:
+			return getAllRecipesFail(state, action);
+		case GET_USER_RECIPES_START:
+			return getUserRecipesStart(state, action);
+		case GET_USER_RECIPES_SUCCESS:
+			return getUserRecipesSuccess(state, action);
+		case GET_USER_RECIPES_FAIL:
+			return getUserRecipesFail(state, action);
+		default:
+			return { ...state };
+	}
+};
+
+export default reducer;

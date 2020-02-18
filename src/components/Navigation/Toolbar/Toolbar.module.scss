@@ -42,7 +42,7 @@
 			background-color: $background;
 			color: $primary;
 			&:before {
-				content: 'Riccetario';
+				content: 'Ricettario';
 			}
 			@include mobile-device {
 				width: 25px;

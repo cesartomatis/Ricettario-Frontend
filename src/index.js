@@ -10,6 +10,7 @@ import './index.scss';
 import App from './App';
 import { I18nContextProvider } from './i18n/index';
 import authReducer from './store/reducers/auth';
+import recipeReducer from './store/reducers/recipe';
 
 const composeEnhancers =
 	process.env.REACT_APP_ENVIRONMENT.trim() === 'development'
@@ -17,7 +18,8 @@ const composeEnhancers =
 		: compose;
 
 const rootReducer = combineReducers({
-	auth: authReducer
+	auth: authReducer,
+	recipe: recipeReducer
 });
 
 const store = createStore(
