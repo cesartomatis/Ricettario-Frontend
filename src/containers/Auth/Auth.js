@@ -13,7 +13,6 @@ const Auth = (props) => {
 
 	const authChangedHandler = () => {
 		setIsSignIn(!isSignIn);
-		console.log('AUTH CHANGED', isSignIn);
 	};
 
 	return (

@@ -7,7 +7,10 @@ import {
 	GET_ALL_RECIPES_FAIL,
 	GET_USER_RECIPES_START,
 	GET_USER_RECIPES_SUCCESS,
-	GET_USER_RECIPES_FAIL
+	GET_USER_RECIPES_FAIL,
+	ADD_RECIPE_START,
+	ADD_RECIPE_SUCCESS,
+	ADD_RECIPE_FAIL
 } from './action-types';
 import * as recipeService from '../../service/recipe.service';
 
@@ -71,6 +74,26 @@ const getUserRecipesFail = (error) => {
 	};
 };
 
+const addRecipeStart = () => {
+	return {
+		type: ADD_RECIPE_START
+	};
+};
+
+const addRecipeSuccess = (recipe) => {
+	return {
+		type: ADD_RECIPE_SUCCESS,
+		recipe
+	};
+};
+
+const addRecipeFail = (error) => {
+	return {
+		type: ADD_RECIPE_FAIL,
+		error
+	};
+};
+
 export const getPublicRecipes = () => {
 	return async (dispatch) => {
 		dispatch(getPublicRecipesStart());
@@ -103,6 +126,25 @@ export const getUserRecipes = () => {
 			dispatch(getUserRecipesSuccess(response.data.recipes));
 		} catch (err) {
 			dispatch(getUserRecipesFail(err));
+		}
+	};
+};
+
+export const addRecipe = ({ file, body }) => {
+	return async (dispatch) => {
+		dispatch(addRecipeStart());
+		try {
+			if (file) {
+				const resp = await recipeService.addRecipe(file, body);
+				// body.photo = resp.data.photo;
+				// const response = await recipeService.addRecipe(body);
+				dispatch(addRecipeSuccess(resp.data.recipe));
+			} else {
+				const response = await recipeService.addRecipe(body);
+				dispatch(addRecipeSuccess(response.data.recipe));
+			}
+		} catch (err) {
+			dispatch(addRecipeFail(err));
 		}
 	};
 };

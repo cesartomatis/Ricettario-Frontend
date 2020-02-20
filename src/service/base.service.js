@@ -30,4 +30,19 @@ export const httpDelete = (url) => {
 	return instance.delete(url);
 };
 
+export const httpPostFormData = (url, image, data) => {
+	const token = localStorage.getItem('token');
+	const formData = new FormData();
+	formData.append('image', image);
+	formData.append('data', JSON.stringify(data));
+	const instanceFormData = axios.create({
+		baseURL: process.env.REACT_APP_BASE_URL,
+		headers: {
+			'Content-Type': 'multipart/form-data',
+			Authorization: `Bearer ${token}`
+		}
+	});
+	instanceFormData.post(url, formData);
+};
+
 export default instance;

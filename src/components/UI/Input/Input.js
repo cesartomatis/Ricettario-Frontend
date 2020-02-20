@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, Fragment } from 'react';
 
 import classes from './Input.module.scss';
 import { I18nContext } from '../../../i18n/index';
@@ -50,6 +50,13 @@ const Input = (props) => {
 						</option>
 					))}
 				</select>
+			);
+			break;
+		case 'file':
+			inputElement = (
+				<Fragment>
+					<input onChange={props.changed} {...props.elementConfig} />
+				</Fragment>
 			);
 			break;
 		default:

@@ -7,7 +7,10 @@ import {
 	GET_ALL_RECIPES_FAIL,
 	GET_USER_RECIPES_START,
 	GET_USER_RECIPES_SUCCESS,
-	GET_USER_RECIPES_FAIL
+	GET_USER_RECIPES_FAIL,
+	ADD_RECIPE_START,
+	ADD_RECIPE_SUCCESS,
+	ADD_RECIPE_FAIL
 } from '../actions/action-types';
 
 const initialState = {
@@ -84,6 +87,29 @@ const getUserRecipesFail = (state, action) => {
 	};
 };
 
+const addRecipeStart = (state, action) => {
+	return {
+		...state,
+		error: null
+	};
+};
+
+const addRecipeSuccess = (state, action) => {
+	return {
+		...state,
+		recipes: [...state.recipes, action.recipe],
+		error: null
+	};
+};
+
+const addRecipeFail = (state, action) => {
+	return {
+		...state,
+		recipes: null,
+		error: action.error
+	};
+};
+
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
 		case GET_PUBLIC_RECIPES_START:
@@ -104,6 +130,12 @@ const reducer = (state = initialState, action) => {
 			return getUserRecipesSuccess(state, action);
 		case GET_USER_RECIPES_FAIL:
 			return getUserRecipesFail(state, action);
+		case ADD_RECIPE_START:
+			return addRecipeStart(state, action);
+		case ADD_RECIPE_SUCCESS:
+			return addRecipeSuccess(state, action);
+		case ADD_RECIPE_FAIL:
+			return addRecipeFail(state, action);
 		default:
 			return { ...state };
 	}
