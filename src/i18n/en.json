@@ -8,6 +8,10 @@
 	"OR": "|",
 	"NAME": "Name(s)",
 	"LASTNAME": "Lastname(s)",
+	"---RECIPE_FORM---": "",
+	"RECIPE_TITLE": "Title",
+	"RECIPE_TIPS": "Tips",
+	"RECIPE_PHOTO": "Photo",
 	"---UI---": "",
 	"CLOSE": "Close"
 }

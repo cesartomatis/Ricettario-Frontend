@@ -1,9 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 
 import { checkValidity } from '../../../shared/validations';
 import Input from '../../UI/Input/Input';
 import Button from '../../UI/Button/Button';
-import { I18nContext } from '../../../i18n';
 import { useDispatch } from 'react-redux';
 import { addRecipe } from '../../../store/actions/recipe';
 
@@ -69,7 +68,6 @@ const initialState = {
 };
 
 const RecipeForm = (props) => {
-	const { translate } = useContext(I18nContext);
 	const [controls, setControls] = useState(initialState);
 	const [formIsValid, setFormIsValid] = useState(true);
 
@@ -98,6 +96,11 @@ const RecipeForm = (props) => {
 				touched: true
 			}
 		};
+		if (controlName === 'photo') {
+			updatedControls[controlName].imgPreview = URL.createObjectURL(
+				event.target.files[0]
+			);
+		}
 		let formIsValid = true;
 		for (let elementId in updatedControls) {
 			formIsValid = formIsValid && updatedControls[elementId].valid;
@@ -106,20 +109,27 @@ const RecipeForm = (props) => {
 		setFormIsValid(formIsValid);
 	};
 
-	let form = formElementsArray.map((formElement) => (
-		<Input
-			key={formElement.id}
-			label={formElement.config.elementConfig.placeholder}
-			elementType={formElement.config.elementType}
-			elementIcon={formElement.config.elementIcon}
-			elementConfig={formElement.config.elementConfig}
-			value={formElement.config.value}
-			changed={inputChangedHandler.bind(this, formElement.id)}
-			invalid={!formElement.config.valid}
-			shouldValidate={formElement.config.validation}
-			touched={formElement.config.touched}
-		/>
-	));
+	let form = formElementsArray.map((formElement) => {
+		console.log(
+			'[RecipeForm.js] - formElementsArray.map() - formElement',
+			formElement
+		);
+		return (
+			<Input
+				key={formElement.id}
+				label={formElement.config.elementConfig.placeholder}
+				elementType={formElement.config.elementType}
+				elementIcon={formElement.config.elementIcon}
+				elementConfig={formElement.config.elementConfig}
+				value={formElement.config.value}
+				changed={inputChangedHandler.bind(this, formElement.id)}
+				invalid={!formElement.config.valid}
+				shouldValidate={formElement.config.validation}
+				touched={formElement.config.touched}
+				imgPreview={formElement.config.imgPreview}
+			/>
+		);
+	});
 
 	const submitHandler = (event) => {
 		event.preventDefault();

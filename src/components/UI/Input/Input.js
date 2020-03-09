@@ -33,6 +33,7 @@ const Input = (props) => {
 				<textarea
 					className={classes.InputElement}
 					{...props.elementConfig}
+					placeholder={translate(props.elementConfig.placeholder)}
 					value={props.value}
 					onChange={props.changed}
 				/>
@@ -56,6 +57,7 @@ const Input = (props) => {
 			inputElement = (
 				<Fragment>
 					<input onChange={props.changed} {...props.elementConfig} />
+					<img src={props.imgPreview} height="300" width="300" alt="" />
 				</Fragment>
 			);
 			break;
