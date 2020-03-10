@@ -1,0 +1,39 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/breakpoints.scss';
+
+.CheckboxContainer {
+	display: flex;
+	flex-flow: row;
+	justify-content: flex-start;
+	align-items: center;
+	border-bottom: 1px solid $primary;
+	box-sizing: border-box;
+	&:hover {
+		cursor: pointer;
+	}
+	.CheckboxUnchecked,
+	.CheckboxChecked {
+		height: 15px;
+		width: 15px;
+		border: 1px solid $primary;
+		margin: 16px 6px 6px 0px;
+	}
+	.CheckboxUnchecked {
+		background-color: transparent;
+	}
+	.CheckboxChecked {
+		background-color: $secondary;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		.CheckboxIcon {
+			color: $primary;
+			font-size: 15px;
+			font-weight: bold;
+		}
+	}
+	.CheckboxText {
+		color: $primary;
+		margin: 16px 0px 6px 0px;
+	}
+}

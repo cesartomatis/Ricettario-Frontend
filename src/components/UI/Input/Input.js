@@ -2,6 +2,8 @@ import React, { useContext, Fragment } from 'react';
 
 import classes from './Input.module.scss';
 import { I18nContext } from '../../../i18n/index';
+import ImgAdd from '../../../assets/images/add_image.png';
+import Checkbox from '../Checkbox/Checkbox';
 
 const Input = (props) => {
 	const { translate } = useContext(I18nContext);
@@ -14,6 +16,11 @@ const Input = (props) => {
 	}
 
 	switch (props.elementType) {
+		case 'checkbox':
+			inputElement = (
+				<Checkbox {...props}>{translate('PUBLIC_RECIPE')}</Checkbox>
+			);
+			break;
 		case 'input':
 			inputElement = (
 				<div className={inputClasses.join(' ')}>
@@ -30,13 +37,16 @@ const Input = (props) => {
 			break;
 		case 'textarea':
 			inputElement = (
-				<textarea
-					className={classes.InputElement}
-					{...props.elementConfig}
-					placeholder={translate(props.elementConfig.placeholder)}
-					value={props.value}
-					onChange={props.changed}
-				/>
+				<div className={inputClasses.join(' ')}>
+					<i className={iconClasses.join(' ')}>{props.elementIcon}</i>
+					<textarea
+						className={classes.InputElement}
+						{...props.elementConfig}
+						placeholder={translate(props.elementConfig.placeholder)}
+						value={props.value}
+						onChange={props.changed}
+					/>
+				</div>
 			);
 			break;
 		case 'select':
@@ -55,9 +65,26 @@ const Input = (props) => {
 			break;
 		case 'file':
 			let inputEl = null;
+			const iconCSS = [classes.AddPhotoIcon, 'material-icons'];
 			inputElement = (
 				<Fragment>
-					<img src={props.imgPreview} height="300" width="300" alt="" />
+					<div
+						className={classes.AddPhotoContainer}
+						onClick={(e) => {
+							e.preventDefault();
+							inputEl.click();
+						}}>
+						<img
+							className={classes.AddPhotoImg}
+							src={props.imgPreview ? props.imgPreview : ImgAdd}
+							alt=""
+						/>
+						<div className={classes.AddPhotoLabelContainer}>
+							<i className={iconCSS.join(' ')}>add</i>
+							<p className={classes.AddPhotoLabel}>ADD_PHOTO</p>
+						</div>
+					</div>
+
 					<input
 						accept="image/*"
 						onChange={props.changed}
@@ -65,13 +92,6 @@ const Input = (props) => {
 						style={{ display: 'none' }}
 						ref={(input) => (inputEl = input)}
 					/>
-					<button
-						onClick={(e) => {
-							e.preventDefault();
-							inputEl.click();
-						}}>
-						Photo
-					</button>
 				</Fragment>
 			);
 			break;

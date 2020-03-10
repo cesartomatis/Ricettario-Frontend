@@ -12,6 +12,9 @@
 	"RECIPE_TITLE": "Título",
 	"RECIPE_TIPS": "Consejos",
 	"RECIPE_PHOTO": "Foto",
+	"IS_PUBLIC": "Receta pública",
+	"PUBLIC_RECIPE": "Sí, deseo que esté disponible para todos",
 	"---UI---": "",
-	"CLOSE": "Cerrar"
+	"CLOSE": "Cerrar",
+	"UPLOAD": "Subir"
 }

@@ -12,6 +12,9 @@
 	"RECIPE_TITLE": "Title",
 	"RECIPE_TIPS": "Tips",
 	"RECIPE_PHOTO": "Photo",
+	"IS_PUBLIC": "Public recipe",
+	"PUBLIC_RECIPE": "Yes, I wish to make it available for everyone",
 	"---UI---": "",
-	"CLOSE": "Close"
+	"CLOSE": "Close",
+	"UPLOAD": "Upload"
 }

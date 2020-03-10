@@ -1,29 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import { checkValidity } from '../../../shared/validations';
 import Input from '../../UI/Input/Input';
 import Button from '../../UI/Button/Button';
 import { useDispatch } from 'react-redux';
 import { addRecipe } from '../../../store/actions/recipe';
+import { I18nContext } from '../../../i18n';
 
 const initialState = {
-	// isPublic: {
-	// 	elementType: 'checkbox',
-	// 	elementIcon: '',
-	// 	elementConfig: {
-	// 		type: '',
-	// 		placeholder: 'IS_PUBLIC'
-	// 	},
-	// 	value: true,
-	// 	validation: {
-	// 		required: true,
-	// 	},
-	// 	valid: false,
-	// 	touched: false
-	// },
+	isPublic: {
+		elementType: 'checkbox',
+		elementIcon: '',
+		elementConfig: {
+			type: '',
+			placeholder: 'IS_PUBLIC'
+		},
+		value: true,
+		valid: false,
+		touched: false
+	},
 	title: {
 		elementType: 'input',
-		elementIcon: 'person_outline',
+		elementIcon: 'title',
 		elementConfig: {
 			type: 'text',
 			placeholder: 'RECIPE_TITLE'
@@ -38,7 +36,7 @@ const initialState = {
 	},
 	tips: {
 		elementType: 'textarea',
-		elementIcon: 'person_outline',
+		elementIcon: 'help_outline',
 		elementConfig: {
 			type: 'text',
 			placeholder: 'RECIPE_TIPS'
@@ -68,6 +66,7 @@ const initialState = {
 };
 
 const RecipeForm = (props) => {
+	const { translate } = useContext(I18nContext);
 	const [controls, setControls] = useState(initialState);
 	const [formIsValid, setFormIsValid] = useState(true);
 
@@ -89,10 +88,9 @@ const RecipeForm = (props) => {
 				...controls[controlName],
 				value:
 					controlName === 'photo' ? event.target.files[0] : event.target.value,
-				valid: checkValidity(
-					event.target.value,
-					controls[controlName].validation
-				),
+				valid: controls[controlName].validation
+					? checkValidity(event.target.value, controls[controlName].validation)
+					: true,
 				touched: true
 			}
 		};
@@ -100,6 +98,10 @@ const RecipeForm = (props) => {
 			updatedControls[controlName].imgPreview = URL.createObjectURL(
 				event.target.files[0]
 			);
+		}
+
+		if (controlName === 'isPublic') {
+			updatedControls[controlName].value = event.target.value;
 		}
 		let formIsValid = true;
 		for (let elementId in updatedControls) {
@@ -143,7 +145,7 @@ const RecipeForm = (props) => {
 		<form onSubmit={submitHandler}>
 			{form}
 			<Button disabled={!formIsValid} btnType="Success">
-				upload
+				{translate('UPLOAD')}
 			</Button>
 		</form>
 	);
