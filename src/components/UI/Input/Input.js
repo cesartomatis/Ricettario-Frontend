@@ -81,7 +81,7 @@ const Input = (props) => {
 						/>
 						<div className={classes.AddPhotoLabelContainer}>
 							<i className={iconCSS.join(' ')}>add</i>
-							<p className={classes.AddPhotoLabel}>ADD_PHOTO</p>
+							<p className={classes.AddPhotoLabel}>{translate('ADD_PHOTO')}</p>
 						</div>
 					</div>
 

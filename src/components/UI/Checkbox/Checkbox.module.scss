@@ -20,6 +20,9 @@
 	}
 	.CheckboxUnchecked {
 		background-color: transparent;
+		.CheckboxIcon {
+			display: none;
+		}
 	}
 	.CheckboxChecked {
 		background-color: $secondary;

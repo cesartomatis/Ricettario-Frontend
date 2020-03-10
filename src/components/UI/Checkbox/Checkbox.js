@@ -3,22 +3,24 @@ import React from 'react';
 import classes from './Checkbox.module.scss';
 
 const Checkbox = (props) => {
-	let checkBox = <div className={classes.CheckboxUnchecked}></div>;
+	let cbClass = classes.CheckboxUnchecked;
 	if (props.value) {
-		checkBox = (
-			<div className={classes.CheckboxChecked}>
-				<i className={[classes.CheckboxIcon, 'material-icons'].join(' ')}>
-					check
-				</i>
-			</div>
-		);
+		cbClass = classes.CheckboxChecked;
 	}
 	return (
 		<div
 			className={[classes.CheckboxContainer, classes.InputItem].join(' ')}
 			onClick={props.changed}>
-			{checkBox}
-			<p className={classes.CheckboxText}>{props.children}</p>
+			<div className={cbClass}>
+				<i
+					value={props.value}
+					className={[classes.CheckboxIcon, 'material-icons'].join(' ')}>
+					check
+				</i>
+			</div>
+			<p value={props.value} className={classes.CheckboxText}>
+				{props.children}
+			</p>
 		</div>
 	);
 };

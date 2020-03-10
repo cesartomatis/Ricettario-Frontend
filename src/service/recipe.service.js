@@ -1,4 +1,4 @@
-import { httpGet, httpPostFormData, httpPost } from './base.service';
+import { httpGet, httpPostFormData } from './base.service';
 
 export const getPublicRecipes = () => {
 	return httpGet('recipe/listpublic');

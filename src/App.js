@@ -8,6 +8,9 @@ import Spinner from './components/UI/Spinner/Spinner';
 import { setToken } from './service/base.service';
 
 const Auth = React.lazy(() => import('./containers/Auth/Auth'));
+const AddRecipe = React.lazy(() =>
+	import('./containers/Recipe/AddRecipe/AddRecipe')
+);
 
 const token = localStorage.getItem('token');
 if (token) {
@@ -24,6 +27,14 @@ const App = (props) => {
 						render={(props) => (
 							<Suspense fallback={<Spinner />}>
 								<Auth {...props} />
+							</Suspense>
+						)}
+					/>
+					<Route
+						path="/new-recipe"
+						render={(props) => (
+							<Suspense fallback={<Spinner />}>
+								<AddRecipe {...props} />
 							</Suspense>
 						)}
 					/>

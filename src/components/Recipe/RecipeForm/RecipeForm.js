@@ -12,7 +12,7 @@ const initialState = {
 		elementType: 'checkbox',
 		elementIcon: '',
 		elementConfig: {
-			type: '',
+			type: 'checkbox',
 			placeholder: 'IS_PUBLIC'
 		},
 		value: true,
@@ -86,8 +86,7 @@ const RecipeForm = (props) => {
 			...controls,
 			[controlName]: {
 				...controls[controlName],
-				value:
-					controlName === 'photo' ? event.target.files[0] : event.target.value,
+				value: event.target.value,
 				valid: controls[controlName].validation
 					? checkValidity(event.target.value, controls[controlName].validation)
 					: true,
@@ -98,10 +97,14 @@ const RecipeForm = (props) => {
 			updatedControls[controlName].imgPreview = URL.createObjectURL(
 				event.target.files[0]
 			);
+
+			updatedControls[controlName].value = event.target.files[0];
 		}
 
 		if (controlName === 'isPublic') {
-			updatedControls[controlName].value = event.target.value;
+			console.log(event.target.getAttribute('value'));
+			updatedControls[controlName].value =
+				event.target.getAttribute('value') === 'true' ? false : true;
 		}
 		let formIsValid = true;
 		for (let elementId in updatedControls) {
@@ -124,6 +127,7 @@ const RecipeForm = (props) => {
 				elementIcon={formElement.config.elementIcon}
 				elementConfig={formElement.config.elementConfig}
 				value={formElement.config.value}
+				checked={formElement.config.checked}
 				changed={inputChangedHandler.bind(this, formElement.id)}
 				invalid={!formElement.config.valid}
 				shouldValidate={formElement.config.validation}
