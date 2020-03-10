@@ -54,10 +54,24 @@ const Input = (props) => {
 			);
 			break;
 		case 'file':
+			let inputEl = null;
 			inputElement = (
 				<Fragment>
-					<input onChange={props.changed} {...props.elementConfig} />
 					<img src={props.imgPreview} height="300" width="300" alt="" />
+					<input
+						accept="image/*"
+						onChange={props.changed}
+						{...props.elementConfig}
+						style={{ display: 'none' }}
+						ref={(input) => (inputEl = input)}
+					/>
+					<button
+						onClick={(e) => {
+							e.preventDefault();
+							inputEl.click();
+						}}>
+						Photo
+					</button>
 				</Fragment>
 			);
 			break;
