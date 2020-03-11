@@ -130,19 +130,12 @@ export const getUserRecipes = () => {
 	};
 };
 
-export const addRecipe = ({ file, body }) => {
+export const addRecipe = (file, body) => {
 	return async (dispatch) => {
 		dispatch(addRecipeStart());
 		try {
-			if (file) {
-				const resp = await recipeService.addRecipe(file, body);
-				// body.photo = resp.data.photo;
-				// const response = await recipeService.addRecipe(body);
-				dispatch(addRecipeSuccess(resp.data.recipe));
-			} else {
-				const response = await recipeService.addRecipe(body);
-				dispatch(addRecipeSuccess(response.data.recipe));
-			}
+			const resp = await recipeService.addRecipe(file, body);
+			dispatch(addRecipeSuccess(resp.data.recipe));
 		} catch (err) {
 			dispatch(addRecipeFail(err));
 		}

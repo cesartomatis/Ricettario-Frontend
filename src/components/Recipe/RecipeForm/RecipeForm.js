@@ -16,8 +16,8 @@ const initialState = {
 			placeholder: 'IS_PUBLIC'
 		},
 		value: true,
-		valid: false,
-		touched: false
+		valid: true,
+		touched: true
 	},
 	title: {
 		elementType: 'input',
@@ -58,9 +58,9 @@ const initialState = {
 		},
 		value: null,
 		validation: {
-			required: true
+			required: false
 		},
-		valid: false,
+		valid: true,
 		touched: false
 	}
 };
@@ -68,10 +68,11 @@ const initialState = {
 const RecipeForm = (props) => {
 	const { translate } = useContext(I18nContext);
 	const [controls, setControls] = useState(initialState);
-	const [formIsValid, setFormIsValid] = useState(true);
+	const [imgDeleted, setImgDeleted] = useState(false);
+	const [formIsValid, setFormIsValid] = useState(false);
 
 	const dispatch = useDispatch();
-	const onAddRecipe = (file, body) => dispatch(addRecipe({ file, body }));
+	const onAddRecipe = (file, body) => dispatch(addRecipe(file, body));
 
 	const formElementsArray = [];
 	for (let key in controls) {
@@ -82,29 +83,40 @@ const RecipeForm = (props) => {
 	}
 
 	const inputChangedHandler = (controlName, event) => {
-		const updatedControls = {
-			...controls,
-			[controlName]: {
-				...controls[controlName],
-				value: event.target.value,
-				valid: controls[controlName].validation
-					? checkValidity(event.target.value, controls[controlName].validation)
-					: true,
-				touched: true
+		let updatedControls = null;
+		if (event) {
+			updatedControls = {
+				...controls,
+				[controlName]: {
+					...controls[controlName],
+					valid: controls[controlName].validation
+						? checkValidity(
+								event.target.value,
+								controls[controlName].validation
+						  )
+						: true,
+					touched: true
+				}
+			};
+			if (controlName === 'photo') {
+				if (event.target.files.length > 0) {
+					updatedControls[controlName].imgPreview = URL.createObjectURL(
+						event.target.files[event.target.files.length - 1]
+					);
+
+					updatedControls[controlName].value = event.target.files[0];
+					setImgDeleted(false);
+				}
+			} else if (controlName === 'isPublic') {
+				updatedControls[controlName].value =
+					event.target.getAttribute('value') === 'true' ? false : true;
+			} else {
+				updatedControls[controlName].value = event.target.value;
 			}
-		};
-		if (controlName === 'photo') {
-			updatedControls[controlName].imgPreview = URL.createObjectURL(
-				event.target.files[0]
-			);
-
-			updatedControls[controlName].value = event.target.files[0];
-		}
-
-		if (controlName === 'isPublic') {
-			console.log(event.target.getAttribute('value'));
-			updatedControls[controlName].value =
-				event.target.getAttribute('value') === 'true' ? false : true;
+		} else {
+			updatedControls = {
+				...controls
+			};
 		}
 		let formIsValid = true;
 		for (let elementId in updatedControls) {
@@ -112,6 +124,10 @@ const RecipeForm = (props) => {
 		}
 		setControls(updatedControls);
 		setFormIsValid(formIsValid);
+	};
+
+	const deleteImgHandler = () => {
+		setImgDeleted(true);
 	};
 
 	let form = formElementsArray.map((formElement) => {
@@ -133,13 +149,19 @@ const RecipeForm = (props) => {
 				shouldValidate={formElement.config.validation}
 				touched={formElement.config.touched}
 				imgPreview={formElement.config.imgPreview}
+				deleteImg={deleteImgHandler}
 			/>
 		);
 	});
 
 	const submitHandler = (event) => {
 		event.preventDefault();
-		onAddRecipe(controls.photo.value, {
+		let photo = null;
+		if (!imgDeleted) {
+			photo = controls.photo.value;
+		}
+		onAddRecipe(photo, {
+			isPublic: controls.isPublic.value,
 			title: controls.title.value,
 			tips: controls.tips.value
 		});

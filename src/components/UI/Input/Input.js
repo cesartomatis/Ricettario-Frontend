@@ -1,9 +1,9 @@
-import React, { useContext, Fragment } from 'react';
+import React, { useContext } from 'react';
 
 import classes from './Input.module.scss';
 import { I18nContext } from '../../../i18n/index';
-import ImgAdd from '../../../assets/images/add_image.png';
 import Checkbox from '../Checkbox/Checkbox';
+import ImageUploader from '../ImageUploader/ImageUploader';
 
 const Input = (props) => {
 	const { translate } = useContext(I18nContext);
@@ -64,36 +64,7 @@ const Input = (props) => {
 			);
 			break;
 		case 'file':
-			let inputEl = null;
-			const iconCSS = [classes.AddPhotoIcon, 'material-icons'];
-			inputElement = (
-				<Fragment>
-					<div
-						className={classes.AddPhotoContainer}
-						onClick={(e) => {
-							e.preventDefault();
-							inputEl.click();
-						}}>
-						<img
-							className={classes.AddPhotoImg}
-							src={props.imgPreview ? props.imgPreview : ImgAdd}
-							alt=""
-						/>
-						<div className={classes.AddPhotoLabelContainer}>
-							<i className={iconCSS.join(' ')}>add</i>
-							<p className={classes.AddPhotoLabel}>{translate('ADD_PHOTO')}</p>
-						</div>
-					</div>
-
-					<input
-						accept="image/*"
-						onChange={props.changed}
-						{...props.elementConfig}
-						style={{ display: 'none' }}
-						ref={(input) => (inputEl = input)}
-					/>
-				</Fragment>
-			);
+			inputElement = <ImageUploader {...props} />;
 			break;
 		default:
 			inputElement = (
