@@ -1,4 +1,5 @@
-import React, { useContext, Fragment } from 'react';
+import React, { useContext, Fragment, useEffect } from 'react';
+import autosize from 'autosize';
 
 import classes from './Input.module.scss';
 import { I18nContext } from '../../../i18n/index';
@@ -7,6 +8,15 @@ import ImageUploader from '../ImageUploader/ImageUploader';
 
 const Input = (props) => {
 	const { translate } = useContext(I18nContext);
+	let txtArea = null;
+
+	useEffect(() => {
+		if (txtArea) {
+			console.log('aasdasdasd');
+			autosize(txtArea);
+		}
+	}, []);
+
 	let inputElement = null;
 	const inputClasses = [classes.InputItem];
 	const txtAreaStyle = {
@@ -57,6 +67,7 @@ const Input = (props) => {
 							placeholder={translate(props.elementConfig.placeholder)}
 							value={props.value}
 							onChange={props.changed}
+							ref={(ta) => (txtArea = ta)}
 						/>
 					</div>
 				</Fragment>

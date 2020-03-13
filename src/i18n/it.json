@@ -1,0 +1,23 @@
+{
+	"---AUTH---": "",
+	"ACCOUNT": "Account",
+	"EMAIL": "Email",
+	"PASSWORD": "Password",
+	"SIGNIN": "Registrati",
+	"SIGNUP": "Iscriviti",
+	"OR": "|",
+	"NAME": "Nome",
+	"LASTNAME": "Cognome",
+	"---RECIPE_FORM---": "",
+	"RECIPE_TITLE": "Titolo",
+	"RECIPE_DIRECTIONS": "Preparazione",
+	"RECIPE_TIPS": "Nota",
+	"RECIPE_PHOTO": "Foto",
+	"IS_PUBLIC": "Ricetta pubblica",
+	"PUBLIC_RECIPE": "Voglio che sia disponibile per tutti",
+	"ADD_PHOTO": "Aggiungere foto",
+	"CHANGE_PHOTO": "Cambia foto",
+	"CREATE_RECIPE": "Crea ricetta",
+	"---UI---": "",
+	"CLOSE": "Uscita"
+}
