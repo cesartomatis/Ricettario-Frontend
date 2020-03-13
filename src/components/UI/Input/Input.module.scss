@@ -39,9 +39,10 @@
 	box-sizing: border-box;
 	color: $primary;
 	height: 37px;
-	// @include mobile-device {
-	// 	height: auto;
-	// }
+}
+
+.TextArea {
+	height: 100px;
 }
 
 .Icon {

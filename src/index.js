@@ -13,9 +13,9 @@ import authReducer from './store/reducers/auth';
 import recipeReducer from './store/reducers/recipe';
 
 const composeEnhancers =
-	process.env.REACT_APP_ENVIRONMENT.trim() === 'development'
+	(process.env.REACT_APP_ENVIRONMENT.trim() === 'development'
 		? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-		: compose;
+		: null) || compose;
 
 const rootReducer = combineReducers({
 	auth: authReducer,

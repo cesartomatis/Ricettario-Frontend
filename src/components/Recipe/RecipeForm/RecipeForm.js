@@ -8,23 +8,27 @@ import { addRecipe } from '../../../store/actions/recipe';
 import { I18nContext } from '../../../i18n';
 
 const initialState = {
-	isPublic: {
-		elementType: 'checkbox',
-		elementIcon: '',
-		elementConfig: {
-			type: 'checkbox',
-			placeholder: 'IS_PUBLIC'
-		},
-		value: true,
-		valid: true,
-		touched: true
-	},
 	title: {
 		elementType: 'input',
 		elementIcon: 'title',
 		elementConfig: {
 			type: 'text',
 			placeholder: 'RECIPE_TITLE'
+		},
+		value: '',
+		validation: {
+			required: true,
+			minLength: 1
+		},
+		valid: false,
+		touched: false
+	},
+	directions: {
+		elementType: 'textarea',
+		elementIcon: 'list_alt',
+		elementConfig: {
+			type: 'text',
+			placeholder: 'RECIPE_DIRECTIONS'
 		},
 		value: '',
 		validation: {
@@ -62,6 +66,17 @@ const initialState = {
 		},
 		valid: true,
 		touched: false
+	},
+	isPublic: {
+		elementType: 'checkbox',
+		elementIcon: '',
+		elementConfig: {
+			type: 'checkbox',
+			placeholder: 'IS_PUBLIC'
+		},
+		value: true,
+		valid: true,
+		touched: true
 	}
 };
 
@@ -171,7 +186,7 @@ const RecipeForm = (props) => {
 		<form onSubmit={submitHandler}>
 			{form}
 			<Button disabled={!formIsValid} btnType="Success">
-				{translate('UPLOAD')}
+				{translate('CREATE_RECIPE')}
 			</Button>
 		</form>
 	);

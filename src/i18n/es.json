@@ -10,13 +10,14 @@
 	"LASTNAME": "Apellido(s)",
 	"---RECIPE_FORM---": "",
 	"RECIPE_TITLE": "Título",
+	"RECIPE_DIRECTIONS": "Pasos",
 	"RECIPE_TIPS": "Consejos",
 	"RECIPE_PHOTO": "Foto",
 	"IS_PUBLIC": "Receta pública",
-	"PUBLIC_RECIPE": "Sí, deseo que esté disponible para todos",
+	"PUBLIC_RECIPE": "Deseo que esté disponible para todos",
 	"ADD_PHOTO": "Agregar foto",
 	"CHANGE_PHOTO": "Cambiar foto",
+	"CREATE_RECIPE": "Create recipe",
 	"---UI---": "",
-	"CLOSE": "Cerrar",
-	"UPLOAD": "Subir"
+	"CLOSE": "Cerrar"
 }

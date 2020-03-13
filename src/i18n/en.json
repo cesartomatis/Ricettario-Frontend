@@ -10,13 +10,14 @@
 	"LASTNAME": "Lastname(s)",
 	"---RECIPE_FORM---": "",
 	"RECIPE_TITLE": "Title",
+	"RECIPE_DIRECTIONS": "Directions",
 	"RECIPE_TIPS": "Tips",
 	"RECIPE_PHOTO": "Photo",
 	"IS_PUBLIC": "Public recipe",
-	"PUBLIC_RECIPE": "Yes, I wish to make it available for everyone",
+	"PUBLIC_RECIPE": "I wish to make it available for everyone",
 	"ADD_PHOTO": "Add photo",
 	"CHANGE_PHOTO": "Change photo",
+	"CREATE_RECIPE": "Create recipe",
 	"---UI---": "",
-	"CLOSE": "Close",
-	"UPLOAD": "Upload"
+	"CLOSE": "Close"
 }

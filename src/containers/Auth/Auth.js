@@ -6,6 +6,7 @@ import Signup from '../../components/Auth/Signup/Signup';
 import Button from '../../components/UI/Button/Button';
 import { I18nContext } from '../../i18n';
 import withErrorHandler from '../../hoc/withErrorHandler';
+import Card from '../../components/UI/Card/Card';
 
 const Auth = (props) => {
 	const { translate } = useContext(I18nContext);
@@ -17,24 +18,26 @@ const Auth = (props) => {
 
 	return (
 		<div className={classes.Auth}>
-			<div className={classes.AuthSwitch}>
-				<Button
-					btnType="Neutral"
-					btnSelected={isSignIn ? 'Selected' : ''}
-					clicked={authChangedHandler}
-					disabled={isSignIn}>
-					{translate('SIGNIN')}
-				</Button>
-				<p className={classes.Separator}>{translate('OR')}</p>
-				<Button
-					btnType="Neutral"
-					btnSelected={!isSignIn ? 'Selected' : ''}
-					clicked={authChangedHandler}
-					disabled={!isSignIn}>
-					{translate('SIGNUP')}
-				</Button>
-			</div>
-			{isSignIn ? <Signin /> : <Signup />}
+			<Card classStyle={classes.Card}>
+				<div className={classes.AuthSwitch}>
+					<Button
+						btnType="Neutral"
+						btnSelected={isSignIn ? 'Selected' : ''}
+						clicked={authChangedHandler}
+						disabled={isSignIn}>
+						{translate('SIGNIN')}
+					</Button>
+					<p className={classes.Separator}>{translate('OR')}</p>
+					<Button
+						btnType="Neutral"
+						btnSelected={!isSignIn ? 'Selected' : ''}
+						clicked={authChangedHandler}
+						disabled={!isSignIn}>
+						{translate('SIGNUP')}
+					</Button>
+				</div>
+				{isSignIn ? <Signin /> : <Signup />}
+			</Card>
 		</div>
 	);
 };

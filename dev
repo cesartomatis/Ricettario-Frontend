@@ -1,0 +1,4 @@
+
+> ricettario@0.1.0 start C:\Users\cesar\Documents\Projects\Ricettario\ricettario-frontend
+> sh -ac '. ./.env.${REACT_APP_ENVIRONMENT}; react-scripts start'
+
