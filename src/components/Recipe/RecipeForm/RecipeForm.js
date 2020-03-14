@@ -11,6 +11,7 @@ const initialState = {
 	title: {
 		elementType: 'input',
 		elementIcon: 'title',
+		elementTitle: 'RECIPE_TITLE',
 		elementConfig: {
 			type: 'text',
 			placeholder: 'RECIPE_TITLE'
@@ -24,16 +25,17 @@ const initialState = {
 		touched: false
 	},
 	directions: {
-		elementType: 'textarea',
+		elementType: 'itemslist',
 		elementIcon: 'list_alt',
+		elementTitle: 'RECIPE_DIRECTIONS',
 		elementConfig: {
 			type: 'text',
-			placeholder: 'RECIPE_DIRECTIONS'
+			placeholder: 'RECIPE_DIRECTION'
 		},
-		value: '',
+		value: [''],
 		validation: {
 			required: true,
-			minLength: 1
+			arrayMinLength: 1
 		},
 		valid: false,
 		touched: false
@@ -41,6 +43,7 @@ const initialState = {
 	tips: {
 		elementType: 'textarea',
 		elementIcon: 'help_outline',
+		elementTitle: 'RECIPE_TIPS',
 		elementConfig: {
 			type: 'text',
 			placeholder: 'RECIPE_TIPS'
@@ -56,6 +59,7 @@ const initialState = {
 	photo: {
 		elementType: 'file',
 		elementIcon: 'person_outline',
+		elementTitle: 'RECIPE_PHOTO',
 		elementConfig: {
 			type: 'file',
 			placeholder: 'RECIPE_PHOTO'
@@ -70,6 +74,7 @@ const initialState = {
 	isPublic: {
 		elementType: 'checkbox',
 		elementIcon: '',
+		elementTitle: 'IS_PUBLIC',
 		elementConfig: {
 			type: 'checkbox',
 			placeholder: 'IS_PUBLIC'
@@ -96,6 +101,49 @@ const RecipeForm = (props) => {
 			config: controls[key]
 		});
 	}
+
+	const addItemHandler = () => {
+		console.log('>>> ADD ITEM <<<');
+		const values = [...controls.directions.value];
+		values.push('');
+		const updatedControls = {
+			...controls,
+			directions: {
+				...controls.directions,
+				value: values
+			}
+		};
+		setControls(updatedControls);
+	};
+
+	const deleteItemHandler = (index) => {
+		let values = [...controls.directions.value];
+		// const index = values.findIndex((i) => i === item);
+		console.log('>>> DELETEM ITEM <<<', index);
+		values.splice(index, 1);
+		const updatedControls = {
+			...controls,
+			directions: {
+				...controls.directions,
+				value: values
+			}
+		};
+		setControls(updatedControls);
+	};
+
+	const itemListChangedHandler = (index, event) => {
+		const values = [...controls.directions.value];
+		values[index] = event.target.value;
+		console.log('>>> ITEM CHANGED <<<', controls.directions.value, values);
+		const updatedControls = {
+			...controls,
+			directions: {
+				...controls.directions,
+				value: values
+			}
+		};
+		setControls(updatedControls);
+	};
 
 	const inputChangedHandler = (controlName, event) => {
 		let updatedControls = null;
@@ -146,14 +194,14 @@ const RecipeForm = (props) => {
 	};
 
 	let form = formElementsArray.map((formElement) => {
-		console.log(
-			'[RecipeForm.js] - formElementsArray.map() - formElement',
-			formElement
-		);
+		// console.log(
+		// 	'[RecipeForm.js] - formElementsArray.map() - formElement',
+		// 	formElement
+		// );
 		return (
 			<Input
 				key={formElement.id}
-				label={formElement.config.elementConfig.placeholder}
+				label={formElement.config.elementTitle}
 				elementType={formElement.config.elementType}
 				elementIcon={formElement.config.elementIcon}
 				elementConfig={formElement.config.elementConfig}
@@ -165,6 +213,9 @@ const RecipeForm = (props) => {
 				touched={formElement.config.touched}
 				imgPreview={formElement.config.imgPreview}
 				deleteImg={deleteImgHandler}
+				addItem={addItemHandler}
+				deleteItem={deleteItemHandler}
+				itemChanged={(index, e) => itemListChangedHandler(index, e)}
 			/>
 		);
 	});

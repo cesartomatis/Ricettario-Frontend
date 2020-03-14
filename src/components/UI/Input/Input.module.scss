@@ -46,6 +46,55 @@
 	max-height: 150px;
 }
 
+.SetpsTitle {
+	display: flex;
+	flex-flow: row;
+	justify-content: flex-start;
+	align-items: center;
+	.IconAdd {
+		color: $secondary;
+		margin-left: 5px;
+		margin-bottom: 8px;
+		&:hover {
+			cursor: pointer;
+		}
+	}
+}
+
+.SetpContainer {
+	display: flex;
+	flex-flow: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+	width: 100%;
+	.Setp {
+		display: flex;
+		flex-flow: row;
+		justify-content: flex-start;
+		align-items: flex-start;
+		margin-left: 8px;
+		width: 100%;
+		.StepText {
+			margin: 10px 5px 0px 0px;
+			padding: 0;
+			font-weight: bold;
+			border: 2px solid $secondary;
+			border-radius: 50%;
+			min-width: 20px;
+			height: 20px;
+		}
+		.StepDelete {
+			color: $danger;
+			justify-self: flex-end;
+			margin-top: 10px;
+			margin-right: 6px;
+			&:hover {
+				cursor: pointer;
+			}
+		}
+	}
+}
+
 .Icon {
 	color: $primary;
 	font-size: 1.2rem;

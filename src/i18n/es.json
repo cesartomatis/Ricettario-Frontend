@@ -11,6 +11,7 @@
 	"---RECIPE_FORM---": "",
 	"RECIPE_TITLE": "Título",
 	"RECIPE_DIRECTIONS": "Pasos",
+	"RECIPE_DIRECTION": "Paso",
 	"RECIPE_TIPS": "Consejos",
 	"RECIPE_PHOTO": "Foto",
 	"IS_PUBLIC": "Receta pública",
