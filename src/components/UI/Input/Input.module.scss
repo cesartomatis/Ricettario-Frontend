@@ -44,6 +44,8 @@
 .TextArea {
 	min-height: 37px;
 	max-height: 150px;
+	resize: none;
+	background-color: rgba(232, 232, 232, 0.85);
 }
 
 .SetpsTitle {
@@ -67,6 +69,7 @@
 	align-items: flex-start;
 	justify-content: flex-start;
 	width: 100%;
+	padding-right: 8px;
 	.Setp {
 		display: flex;
 		flex-flow: row;
@@ -74,8 +77,11 @@
 		align-items: flex-start;
 		margin-left: 8px;
 		width: 100%;
+		&:not(:last-child) {
+			border-bottom: 1px solid $primary;
+		}
 		.StepText {
-			margin: 10px 5px 0px 0px;
+			margin: 6px 5px 0px 0px;
 			padding: 0;
 			font-weight: bold;
 			border: 2px solid $secondary;

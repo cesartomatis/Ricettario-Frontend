@@ -34,8 +34,39 @@ const initialState = {
 		},
 		value: [''],
 		validation: {
-			required: true,
 			arrayMinLength: 1
+		},
+		valid: false,
+		touched: false
+	},
+	preparationTime: {
+		elementType: 'timeinput',
+		elementIcon: 'timer',
+		elementTitle: 'RECIPE_PREPARATION_TIME',
+		elementConfig: {
+			type: 'text',
+			placeholder: 'RECIPE_TIME_PLACEHOLDER'
+		},
+		value: '',
+		validation: {
+			required: true,
+			isTime: true
+		},
+		valid: false,
+		touched: false
+	},
+	cookingTime: {
+		elementType: 'timeinput',
+		elementIcon: 'timer',
+		elementTitle: 'RECIPE_COOKING_TIME',
+		elementConfig: {
+			type: 'text',
+			placeholder: 'RECIPE_TIME_PLACEHOLDER'
+		},
+		value: '',
+		validation: {
+			required: true,
+			isTime: true
 		},
 		valid: false,
 		touched: false
@@ -139,9 +170,19 @@ const RecipeForm = (props) => {
 			...controls,
 			directions: {
 				...controls.directions,
-				value: values
+				value: values,
+				valid: checkValidity(values, controls.directions.validation)
 			}
 		};
+
+		let validForm = true;
+		for (let elementId in controls) {
+			if (elementId !== 'directions') {
+				validForm = validForm && controls[elementId].valid;
+			}
+		}
+		validForm = validForm && updatedControls.directions.valid;
+		setFormIsValid(validForm);
 		setControls(updatedControls);
 	};
 
@@ -173,7 +214,7 @@ const RecipeForm = (props) => {
 			} else if (controlName === 'isPublic') {
 				updatedControls[controlName].value =
 					event.target.getAttribute('value') === 'true' ? false : true;
-			} else {
+			} else if (controlName !== 'itemslist') {
 				updatedControls[controlName].value = event.target.value;
 			}
 		} else {

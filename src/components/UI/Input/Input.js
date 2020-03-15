@@ -1,5 +1,5 @@
-import React, { useContext, Fragment, useEffect } from 'react';
-import autosize from 'autosize';
+import React, { useContext, Fragment } from 'react';
+import TextareaAutosize from 'react-textarea-autosize';
 
 import classes from './Input.module.scss';
 import { I18nContext } from '../../../i18n/index';
@@ -8,17 +8,6 @@ import ImageUploader from '../ImageUploader/ImageUploader';
 
 const Input = (props) => {
 	const { translate } = useContext(I18nContext);
-	let txtArea = null;
-	const txtAreas = [];
-
-	useEffect(() => {
-		if (txtArea) {
-			autosize(txtArea);
-		}
-		if (txtAreas.length > 0) {
-			autosize(txtAreas);
-		}
-	}, [txtArea, txtAreas]);
 
 	let inputElement = null;
 	const inputClasses = [classes.InputItem];
@@ -64,13 +53,12 @@ const Input = (props) => {
 					<label className={classes.Label}>{translate(props.label)}</label>
 					<div className={inputClasses.join(' ')} style={txtAreaStyle}>
 						<i className={iconClasses.join(' ')}>{props.elementIcon}</i>
-						<textarea
+						<TextareaAutosize
 							className={[classes.InputElement, classes.TextArea].join(' ')}
 							{...props.elementConfig}
 							placeholder={translate(props.elementConfig.placeholder)}
 							value={props.value}
 							onChange={props.changed}
-							ref={(ta) => (txtArea = ta)}
 						/>
 					</div>
 				</Fragment>
@@ -84,7 +72,7 @@ const Input = (props) => {
 				items.push(
 					<div className={classes.Setp} key={step}>
 						<p className={classes.StepText}>{step}</p>
-						<textarea
+						<TextareaAutosize
 							className={[classes.InputElement, classes.TextArea].join(' ')}
 							{...props.elementConfig}
 							placeholder={`${translate(
@@ -92,17 +80,7 @@ const Input = (props) => {
 							)} ${step}`}
 							value={val}
 							onChange={(e) => props.itemChanged(index, e)}
-							ref={(ta) => txtAreas.push(ta)}
 						/>
-						{/* <input
-							className={classes.InputElement}
-							{...props.elementConfig}
-							placeholder={`${translate(
-								props.elementConfig.placeholder
-							)} ${step}`}
-							value={val}
-							onChange={(e) => props.itemChanged(index, e)}
-						/> */}
 						{props.value.length > 1 ? (
 							<i
 								className={['material-icons', classes.StepDelete].join(' ')}
@@ -129,14 +107,6 @@ const Input = (props) => {
 					<div className={inputClasses.join(' ')} style={txtAreaStyle}>
 						<i className={iconClasses.join(' ')}>{props.elementIcon}</i>
 						<div className={classes.SetpContainer}>{items}</div>
-						{/* <textarea
-							className={[classes.InputElement, classes.TextArea].join(' ')}
-							{...props.elementConfig}
-							placeholder={translate(props.elementConfig.placeholder)}
-							value={props.value}
-							onChange={props.changed}
-							ref={(ta) => (txtArea = ta)}
-						/> */}
 					</div>
 				</Fragment>
 			);
@@ -163,6 +133,44 @@ const Input = (props) => {
 				<Fragment>
 					<label className={classes.Label}>{translate(props.label)}</label>
 					<ImageUploader {...props} />
+				</Fragment>
+			);
+			break;
+		case 'timeinput':
+			inputElement = (
+				<Fragment>
+					<label className={classes.Label}>{translate(props.label)}</label>
+					<div className={inputClasses.join(' ')}>
+						<i className={iconClasses.join(' ')}>{props.elementIcon}</i>
+						<input
+							className={classes.InputElement}
+							{...props.elementConfig}
+							placeholder={translate(props.elementConfig.placeholder)}
+							value={props.value}
+							onChange={(e) => {
+								const start = e.target.selectionStart;
+								const end = e.target.selectionEnd;
+								console.log(e.target.selectionStart, e.target.selectionEnd);
+								if (e.target.value.includes("'")) {
+									e.target.value = e.target.value.substring(
+										0,
+										e.target.value.length - 1
+									);
+								}
+								if (e.target.value === '') {
+									props.changed(e);
+								} else if (/^\d+$/.test(e.target.value)) {
+									e.target.value = `${e.target.value}'`;
+									props.changed(e);
+								}
+								if (start === e.target.value.length) {
+									e.target.setSelectionRange(start - 1, end - 1);
+								} else {
+									e.target.setSelectionRange(start, end);
+								}
+							}}
+						/>
+					</div>
 				</Fragment>
 			);
 			break;

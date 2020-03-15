@@ -1,11 +1,11 @@
 import React, { Fragment, useContext } from 'react';
 
-import classes from './Modal.module.scss';
-import Button from '../Button/Button';
+import classes from './ErrorModal.module.scss';
 import Backdrop from '../Backdrop/Backdrop';
+import Button from '../Button/Button';
 import { I18nContext } from '../../../i18n';
 
-const Modal = (props) => {
+const ErrorModal = (props) => {
 	const { translate } = useContext(I18nContext);
 	const errorIconClasses = ['material-icons', classes.ErrorIcon];
 	const closeIconClasses = ['material-icons', classes.CloseIcon];
@@ -34,7 +34,7 @@ const Modal = (props) => {
 };
 
 export default React.memo(
-	Modal,
+	ErrorModal,
 	(prevProps, nextProps) =>
 		nextProps.show === prevProps.show &&
 		nextProps.children === prevProps.children

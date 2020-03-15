@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 
-import Modal from '../components/UI/Modal/Modal';
+import ErrorModal from '../components/UI/ErrorModal/ErrorModal';
 import useHttpErrorHandler from '../hooks/http-error-handler';
 import httpClient from '../service/base.service';
 
@@ -10,9 +10,9 @@ const withErrorHandler = (WrappedComponent) => {
 
 		return (
 			<Fragment>
-				<Modal show={error} modalClosed={clearError}>
+				<ErrorModal show={error} modalClosed={clearError}>
 					{error ? error.message : null}
-				</Modal>
+				</ErrorModal>
 				<WrappedComponent {...props} />
 			</Fragment>
 		);
