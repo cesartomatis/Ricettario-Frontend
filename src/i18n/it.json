@@ -8,6 +8,7 @@
 	"OR": "|",
 	"NAME": "Nome",
 	"LASTNAME": "Cognome",
+
 	"---RECIPE_FORM---": "",
 	"RECIPE_TITLE": "Titolo",
 	"RECIPE_DIRECTIONS": "Preparazione",
@@ -22,6 +23,31 @@
 	"ADD_PHOTO": "Aggiungere foto",
 	"CHANGE_PHOTO": "Cambia foto",
 	"CREATE_RECIPE": "Crea ricetta",
+	"DIFFICULTY": "Difficoltà",
+	"SERVINGS": "Porzioni",
+	"EASY": "Facile",
+	"MEDIUM": "Moderata",
+	"HARD": "Difficile",
+
+	"---INGREDIENT FORM---": "",
+	"CREATE_INGREDIENT": "Crea ingrediente",
+	"INGREDIENTS": "Ingredienti",
+	"INGREDIENT": "Ingrediente",
+	"CALORIES": "Calorie",
+	"QUANTITY": "Quantità",
+	"UNITS": "Unità (u)",
+	"GRAMS": "Grammi (g)",
+	"KILOGRAMS": "Kilogrammi (kg)",
+	"MILLILITERS": "Mililitri (ml)",
+	"CENTILITERS": "Centilitri (cc)",
+	"LITERS": "Litri (l)",
+
+	"---RECIPE ITEM---": "",
+	"BY": "da",
+	"PREPARATION": "Preparazione",
+	"COOKING": "Cottura",
+	"CALORIESxSERVING": "calorie per porzione",
+
 	"---UI---": "",
-	"CLOSE": "Uscita"
+	"CLOSE": "Anulla"
 }

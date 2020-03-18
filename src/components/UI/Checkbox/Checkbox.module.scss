@@ -8,6 +8,7 @@
 	align-items: center;
 	border-bottom: 1px solid $primary;
 	box-sizing: border-box;
+	user-select: none;
 	&:hover {
 		cursor: pointer;
 	}

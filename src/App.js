@@ -11,6 +11,9 @@ const Auth = React.lazy(() => import('./containers/Auth/Auth'));
 const AddRecipe = React.lazy(() =>
 	import('./containers/Recipe/AddRecipe/AddRecipe')
 );
+const AddIngredient = React.lazy(() =>
+	import('./containers/Ingredient/AddIngredient/AddIngredient')
+);
 
 const token = localStorage.getItem('token');
 if (token) {
@@ -27,6 +30,14 @@ const App = (props) => {
 						render={(props) => (
 							<Suspense fallback={<Spinner />}>
 								<Auth {...props} />
+							</Suspense>
+						)}
+					/>
+					<Route
+						path="/new-ingredient"
+						render={(props) => (
+							<Suspense fallback={<Spinner />}>
+								<AddIngredient {...props} />
 							</Suspense>
 						)}
 					/>

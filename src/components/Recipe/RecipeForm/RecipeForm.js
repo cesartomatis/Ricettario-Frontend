@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, Fragment } from 'react';
 
 import { checkValidity } from '../../../shared/validations';
 import Input from '../../UI/Input/Input';
@@ -6,6 +6,10 @@ import Button from '../../UI/Button/Button';
 import { useDispatch } from 'react-redux';
 import { addRecipe } from '../../../store/actions/recipe';
 import { I18nContext } from '../../../i18n';
+import IngredientForm from '../../Ingredients/IngredientForm/IngredientForm';
+import Modal from '../../UI/Modal/Modal';
+import DishIcon from '../../../assets/images/dish.svg';
+import WaiterIcon from '../../../assets/images/restaurant-waiter.svg';
 
 const initialState = {
 	title: {
@@ -20,6 +24,21 @@ const initialState = {
 		validation: {
 			required: true,
 			minLength: 1
+		},
+		valid: false,
+		touched: false
+	},
+	ingredients: {
+		elementType: 'itemspopoverlist',
+		elementIcon: 'list_alt',
+		elementTitle: 'INGREDIENTS',
+		elementConfig: {
+			type: 'text',
+			placeholder: 'RECIPE_DIRECTION'
+		},
+		value: [],
+		validation: {
+			arrayMinLength: 1
 		},
 		valid: false,
 		touched: false
@@ -71,6 +90,49 @@ const initialState = {
 		valid: false,
 		touched: false
 	},
+	difficulty: {
+		elementType: 'select',
+		elementIcon: WaiterIcon,
+		elementTitle: 'DIFFICULTY',
+		elementConfig: {
+			options: [
+				{
+					value: 'EASY',
+					displayValue: 'EASY'
+				},
+				{
+					value: 'MEDIUM',
+					displayValue: 'MEDIUM'
+				},
+				{
+					value: 'HARD',
+					displayValue: 'HARD'
+				}
+			]
+		},
+		value: 'EASY',
+		validation: {
+			required: true
+		},
+		valid: true,
+		touched: false
+	},
+	servings: {
+		elementType: 'numericinput',
+		elementIcon: DishIcon,
+		elementTitle: 'SERVINGS',
+		elementConfig: {
+			type: 'text',
+			placeholder: 'SERVINGS'
+		},
+		value: '',
+		validation: {
+			required: true,
+			isNumeric: true
+		},
+		valid: false,
+		touched: false
+	},
 	tips: {
 		elementType: 'textarea',
 		elementIcon: 'help_outline',
@@ -81,10 +143,9 @@ const initialState = {
 		},
 		value: '',
 		validation: {
-			required: true,
-			minLength: 1
+			required: false
 		},
-		valid: false,
+		valid: true,
 		touched: false
 	},
 	photo: {
@@ -121,6 +182,7 @@ const RecipeForm = (props) => {
 	const [controls, setControls] = useState(initialState);
 	const [imgDeleted, setImgDeleted] = useState(false);
 	const [formIsValid, setFormIsValid] = useState(false);
+	const [showIngredientModal, setShowIngredientModal] = useState(false);
 
 	const dispatch = useDispatch();
 	const onAddRecipe = (file, body) => dispatch(addRecipe(file, body));
@@ -133,8 +195,48 @@ const RecipeForm = (props) => {
 		});
 	}
 
+	const addIngredientHandler = (ingredient) => {
+		const values = [...controls.ingredients.value];
+		values.push(ingredient);
+		const updatedControls = {
+			...controls,
+			ingredients: {
+				...controls.ingredients,
+				value: values,
+				valid: checkValidity(values, controls.ingredients.validation)
+			}
+		};
+		setControls(updatedControls);
+		ingredientChangedValidation(updatedControls);
+	};
+
+	const deleteIngredientHandler = (index) => {
+		let values = [...controls.ingredients.value];
+		values.splice(index, 1);
+		const updatedControls = {
+			...controls,
+			ingredients: {
+				...controls.ingredients,
+				value: values,
+				valid: checkValidity(values, controls.ingredients.validation)
+			}
+		};
+		setControls(updatedControls);
+		ingredientChangedValidation(updatedControls);
+	};
+
+	const ingredientChangedValidation = (updatedControls) => {
+		let validForm = true;
+		for (let elementId in controls) {
+			if (elementId !== 'ingredients') {
+				validForm = validForm && controls[elementId].valid;
+			}
+		}
+		validForm = validForm && updatedControls.ingredients.valid;
+		setFormIsValid(validForm);
+	};
+
 	const addItemHandler = () => {
-		console.log('>>> ADD ITEM <<<');
 		const values = [...controls.directions.value];
 		values.push('');
 		const updatedControls = {
@@ -149,8 +251,6 @@ const RecipeForm = (props) => {
 
 	const deleteItemHandler = (index) => {
 		let values = [...controls.directions.value];
-		// const index = values.findIndex((i) => i === item);
-		console.log('>>> DELETEM ITEM <<<', index);
 		values.splice(index, 1);
 		const updatedControls = {
 			...controls,
@@ -165,7 +265,6 @@ const RecipeForm = (props) => {
 	const itemListChangedHandler = (index, event) => {
 		const values = [...controls.directions.value];
 		values[index] = event.target.value;
-		console.log('>>> ITEM CHANGED <<<', controls.directions.value, values);
 		const updatedControls = {
 			...controls,
 			directions: {
@@ -234,11 +333,11 @@ const RecipeForm = (props) => {
 		setImgDeleted(true);
 	};
 
+	const showIngredientsModalHandler = () => {
+		setShowIngredientModal(true);
+	};
+
 	let form = formElementsArray.map((formElement) => {
-		// console.log(
-		// 	'[RecipeForm.js] - formElementsArray.map() - formElement',
-		// 	formElement
-		// );
 		return (
 			<Input
 				key={formElement.id}
@@ -257,6 +356,8 @@ const RecipeForm = (props) => {
 				addItem={addItemHandler}
 				deleteItem={deleteItemHandler}
 				itemChanged={(index, e) => itemListChangedHandler(index, e)}
+				showIngredientsModal={showIngredientsModalHandler}
+				deleteIngredient={deleteIngredientHandler}
 			/>
 		);
 	});
@@ -270,17 +371,48 @@ const RecipeForm = (props) => {
 		onAddRecipe(photo, {
 			isPublic: controls.isPublic.value,
 			title: controls.title.value,
+			ingredients: controls.ingredients.value,
+			directions: controls.directions.value,
+			preparationTime: controls.preparationTime.value.substring(
+				0,
+				controls.preparationTime.value.length - 1
+			),
+			cookingTime: controls.cookingTime.value.substring(
+				0,
+				controls.cookingTime.value.length - 1
+			),
+			difficulty: controls.difficulty.value,
+			servings: controls.servings.value,
 			tips: controls.tips.value
 		});
 	};
 
 	return (
-		<form onSubmit={submitHandler}>
-			{form}
-			<Button disabled={!formIsValid} btnType="Success">
-				{translate('CREATE_RECIPE')}
-			</Button>
-		</form>
+		<Fragment>
+			<Modal
+				show={showIngredientModal}
+				title={translate('CREATE_INGREDIENT')}
+				hasCloseButton
+				modalClosed={() => setShowIngredientModal(false)}>
+				<IngredientForm
+					shouldResetValues={!showIngredientModal}
+					clicked={(controls) => {
+						setShowIngredientModal(false);
+						addIngredientHandler({
+							name: controls.name.value,
+							caloriesPerServing: controls.calories.value,
+							quantity: controls.quantity.value
+						});
+					}}
+				/>
+			</Modal>
+			<form onSubmit={submitHandler}>
+				{form}
+				<Button disabled={!formIsValid} btnType="Success">
+					{translate('CREATE_RECIPE')}
+				</Button>
+			</form>
+		</Fragment>
 	);
 };
 

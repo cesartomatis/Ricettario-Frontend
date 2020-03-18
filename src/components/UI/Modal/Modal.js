@@ -7,11 +7,10 @@ import { I18nContext } from '../../../i18n';
 
 const Modal = (props) => {
 	const { translate } = useContext(I18nContext);
-	const errorIconClasses = ['material-icons', classes.ErrorIcon];
 	const closeIconClasses = ['material-icons', classes.CloseIcon];
 	return (
 		<Fragment>
-			<Backdrop show={props.show} clicked={props.modalClosed} />
+			<Backdrop show={props.show} />
 			<div
 				className={classes.Modal}
 				style={{
@@ -19,15 +18,24 @@ const Modal = (props) => {
 					opacity: props.show ? '1' : '0'
 				}}>
 				<div className={classes.ModalHeader}>
-					<i className={errorIconClasses.join(' ')}>error</i>
+					<label className={classes.ModalTitle}>{props.title}</label>
+					{props.hasCloseButton ? (
+						<i
+							className={[...closeIconClasses, classes.ModalExit].join(' ')}
+							onClick={props.modalClosed}>
+							close
+						</i>
+					) : null}
 				</div>
 				<div className={classes.ModalBody}>{props.children}</div>
-				<div className={classes.ModalFooter}>
-					<Button btnType="Modal" clicked={props.modalClosed}>
-						<i className={closeIconClasses.join(' ')}>close</i>
-						<p className={classes.CloseText}>{translate('CLOSE')}</p>
-					</Button>
-				</div>
+				{!props.hasCloseButton ? (
+					<div className={classes.ModalFooter}>
+						<Button btnType="Modal" clicked={props.modalClosed}>
+							<i className={closeIconClasses.join(' ')}>close</i>
+							<p className={classes.CloseText}>{translate('CLOSE')}</p>
+						</Button>
+					</div>
+				) : null}
 			</div>
 		</Fragment>
 	);
