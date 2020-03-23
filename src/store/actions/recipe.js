@@ -10,9 +10,32 @@ import {
 	GET_USER_RECIPES_FAIL,
 	ADD_RECIPE_START,
 	ADD_RECIPE_SUCCESS,
-	ADD_RECIPE_FAIL
+	ADD_RECIPE_FAIL,
+	SET_SELECTED_RECIPE_START,
+	SET_SELECTED_RECIPE_SUCCESS,
+	SET_SELECTED_RECIPE_FAIL
 } from './action-types';
 import * as recipeService from '../../service/recipe.service';
+
+const setSelectedRecipeStart = () => {
+	return {
+		type: SET_SELECTED_RECIPE_START
+	};
+};
+
+const setSelectedRecipeSuccess = (recipe) => {
+	return {
+		type: SET_SELECTED_RECIPE_SUCCESS,
+		recipe
+	};
+};
+
+const setSelectedRecipeFail = (error) => {
+	return {
+		type: SET_SELECTED_RECIPE_FAIL,
+		error
+	};
+};
 
 const getPublicRecipesStart = () => {
 	return {
@@ -91,6 +114,29 @@ const addRecipeFail = (error) => {
 	return {
 		type: ADD_RECIPE_FAIL,
 		error
+	};
+};
+
+export const setSelectedRecipe = (recipe) => {
+	return async (dispatch) => {
+		dispatch(setSelectedRecipeStart());
+		try {
+			dispatch(setSelectedRecipeSuccess(recipe));
+		} catch (err) {
+			dispatch(setSelectedRecipeFail(err));
+		}
+	};
+};
+
+export const getSelectedRecipe = (recipeId) => {
+	return async (dispatch) => {
+		dispatch(setSelectedRecipeStart());
+		try {
+			const response = await recipeService.getRecipe(recipeId);
+			dispatch(setSelectedRecipeSuccess(response.data.recipe));
+		} catch (err) {
+			dispatch(setSelectedRecipeFail(err));
+		}
 	};
 };
 

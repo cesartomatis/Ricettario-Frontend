@@ -1,5 +1,17 @@
+@import '../../../styles/breakpoints.scss';
+
 .RecipeListContainer {
 	display: inline-block;
 	height: 100%;
 	width: 75%;
+	@include mobile-device {
+		width: 100%;
+	}
+}
+
+.CardStyle {
+	display: flex;
+	flex-flow: column;
+	justify-content: flex-start;
+	align-items: center;
 }

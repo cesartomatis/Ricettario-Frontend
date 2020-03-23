@@ -9,13 +9,21 @@ const RecipeList = (props) => {
 	let recipesList = <Spinner />;
 	if (props.recipes) {
 		recipesList = props.recipes.map((r) => (
-			<RecipeItem key={r._id} recipe={r} />
+			<RecipeItem
+				key={r._id}
+				recipe={r}
+				clicked={() => props.recipeClicked(r)}
+			/>
 		));
 	}
 
 	return (
 		<div className={classes.RecipeListContainer}>
-			<Card InlineStyles={{ backgroundColor: 'white' }}>{recipesList}</Card>
+			<Card
+				classStyle={classes.CardStyle}
+				InlineStyles={{ backgroundColor: 'white' }}>
+				{recipesList}
+			</Card>
 		</div>
 	);
 };

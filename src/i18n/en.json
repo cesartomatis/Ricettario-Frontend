@@ -48,6 +48,9 @@
 	"COOKING": "Cooking",
 	"CALORIESxSERVING": "calories per serving",
 
+	"---RECIPE---": "",
+	"OF": "of",
+
 	"---UI---": "",
 	"CLOSE": "Close"
 }

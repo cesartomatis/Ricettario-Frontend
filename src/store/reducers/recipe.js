@@ -10,12 +10,39 @@ import {
 	GET_USER_RECIPES_FAIL,
 	ADD_RECIPE_START,
 	ADD_RECIPE_SUCCESS,
-	ADD_RECIPE_FAIL
+	ADD_RECIPE_FAIL,
+	SET_SELECTED_RECIPE_START,
+	SET_SELECTED_RECIPE_SUCCESS,
+	SET_SELECTED_RECIPE_FAIL
 } from '../actions/action-types';
 
 const initialState = {
 	recipes: null,
-	error: null
+	error: null,
+	selectedRecipe: null
+};
+
+const setSelectedRecipeStart = (state, action) => {
+	return {
+		...state,
+		selectedRecipe: null,
+		error: null
+	};
+};
+
+const setSelectedRecipeSuccess = (state, action) => {
+	return {
+		...state,
+		error: null,
+		selectedRecipe: action.recipe
+	};
+};
+
+const setSelectedRecipeFail = (state, action) => {
+	return {
+		...state,
+		error: action.error
+	};
 };
 
 const getPublicRecipesStart = (state, action) => {
@@ -136,6 +163,12 @@ const reducer = (state = initialState, action) => {
 			return addRecipeSuccess(state, action);
 		case ADD_RECIPE_FAIL:
 			return addRecipeFail(state, action);
+		case SET_SELECTED_RECIPE_START:
+			return setSelectedRecipeStart(state, action);
+		case SET_SELECTED_RECIPE_SUCCESS:
+			return setSelectedRecipeSuccess(state, action);
+		case SET_SELECTED_RECIPE_FAIL:
+			return setSelectedRecipeFail(state, action);
 		default:
 			return { ...state };
 	}

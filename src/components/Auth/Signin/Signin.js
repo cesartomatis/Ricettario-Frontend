@@ -50,7 +50,6 @@ const Signin = (props) => {
 
 	const submitHandler = (event) => {
 		event.preventDefault();
-		console.log('LOGIN CLICKED', controls.email.value, controls.password.value);
 		onLogin(controls.email.value, controls.password.value);
 	};
 

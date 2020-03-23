@@ -1,2 +1,8 @@
-export { login, register, logout } from './auth';
-export { getPublicRecipes, getAllRecipes, getUserRecipes } from './recipe';
+export { login, register, logout, tryAutoLogin } from './auth';
+export {
+	getPublicRecipes,
+	getAllRecipes,
+	getUserRecipes,
+	getSelectedRecipe,
+	setSelectedRecipe
+} from './recipe';

@@ -1,0 +1,18 @@
+@import '../../../styles/variables.scss';
+
+.StepsContainer {
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	align-items: flex-start;
+	width: 95%;
+	padding: 8px 0px;
+	.StepsTitle {
+		width: 100%;
+		text-align: start;
+		font-size: 1.4rem;
+		font-weight: bold;
+		border-bottom: 1px solid $secondary;
+		margin-bottom: 8px;
+	}
+}

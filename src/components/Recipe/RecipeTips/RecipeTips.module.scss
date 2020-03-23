@@ -1,0 +1,21 @@
+@import '../../../styles/variables.scss';
+
+.RecipeTipsContainer {
+	width: 95%;
+	display: flex;
+	flex-flow: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	.TipsTitle {
+		width: 100%;
+		text-align: start;
+		font-size: 1.4rem;
+		font-weight: bold;
+		border-bottom: 1px solid $secondary;
+		margin-bottom: 8px;
+	}
+	.TipsText {
+		font-size: 1rem;
+		text-align: start;
+	}
+}

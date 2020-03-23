@@ -15,3 +15,7 @@ export const getUserRecipes = () => {
 export const addRecipe = (image, data) => {
 	return httpPostFormData('recipe/add', image, data);
 };
+
+export const getRecipe = (recipeId) => {
+	return httpGet(`recipe/${recipeId}`);
+};

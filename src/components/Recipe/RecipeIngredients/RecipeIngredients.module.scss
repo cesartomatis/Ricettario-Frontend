@@ -1,0 +1,39 @@
+@import '../../../styles/breakpoints.scss';
+@import '../../../styles/variables.scss';
+
+.Container {
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	align-items: center;
+	width: 95%;
+	.IngredientTitle {
+		width: 100%;
+		font-weight: bold;
+		font-size: 1.4rem;
+		text-align: start;
+		border-bottom: 1px solid $secondary;
+		margin-bottom: 8px;
+	}
+	.IngredientsContainer {
+		display: grid;
+		width: 100%;
+		margin: 0 auto;
+		grid-template-columns: repeat(auto-fill, 20rem);
+		.IngredientItem {
+			display: flex;
+			flex-flow: row;
+			justify-content: flex-start;
+			align-items: center;
+			width: 100%;
+			margin-left: 1rem;
+			margin-bottom: 1rem;
+			.IngredientIcon {
+				color: $secondary;
+			}
+			.IngredientText {
+				margin-left: 5px;
+			}
+		}
+	}
+}

@@ -1,0 +1,48 @@
+@import '../../../../styles/breakpoints.scss';
+@import '../../../../styles/variables.scss';
+
+.RecipeDetailItem {
+	display: flex;
+	flex-flow: row;
+	justify-content: flex-start;
+	align-items: center;
+	width: 100%;
+	margin-bottom: 8px;
+	.RecipeDetailItemImg {
+		filter: invert(69%) sepia(45%) saturate(6114%) hue-rotate(331deg)
+			brightness(99%) contrast(89%);
+		min-width: 19px;
+		min-height: 19px;
+		max-width: 19px;
+		max-height: 19px;
+		margin-right: 5px;
+	}
+	.RecipeDetailIcon {
+		font-size: 1.3rem;
+		color: $secondary;
+		margin-right: 5px;
+	}
+	.RecipeDetailItemText {
+		font-size: 1rem;
+		color: $primary;
+	}
+	&:first-child {
+		justify-content: flex-end;
+		.RecipeDetailItemImg {
+			min-width: 12px;
+			min-height: 12px;
+			max-width: 12px;
+			max-height: 12px;
+		}
+		.RecipeDetailItemText {
+			font-size: 0.7rem;
+		}
+	}
+	&:last-child {
+		height: 1.5rem;
+		padding: 5px 0px;
+		margin-top: 8px;
+		justify-content: center;
+		background-color: rgba(40, 44, 52, 0.1);
+	}
+}

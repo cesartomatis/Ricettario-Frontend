@@ -48,6 +48,9 @@
 	"COOKING": "Cottura",
 	"CALORIESxSERVING": "calorie per porzione",
 
+	"---RECIPE---": "",
+	"OF": "di",
+
 	"---UI---": "",
 	"CLOSE": "Anulla"
 }

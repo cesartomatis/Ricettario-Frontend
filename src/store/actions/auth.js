@@ -81,3 +81,16 @@ export const logout = () => {
 		type: AUTH_LOGOUT
 	};
 };
+
+export const tryAutoLogin = () => {
+	return async (dispatch) => {
+		const token = localStorage.getItem('token');
+		if (!token) {
+			dispatch(logout());
+		} else {
+			dispatch(loginSuccess(token));
+			localStorage.setItem('token', token);
+			setToken(token);
+		}
+	};
+};

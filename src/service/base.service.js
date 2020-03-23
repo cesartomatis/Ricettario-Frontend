@@ -9,7 +9,7 @@ const instance = axios.create({
 
 export const setToken = (token) => {
 	instance.interceptors.request.use((req) => {
-		req.headers.Authorization = token;
+		req.headers.Authorization = `Bearer ${token}`;
 		return req;
 	});
 };

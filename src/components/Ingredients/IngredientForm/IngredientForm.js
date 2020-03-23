@@ -186,7 +186,6 @@ const IngredientForm = (props) => {
 
 	const submitHandler = (event) => {
 		event.preventDefault();
-		console.log('>>> CONTROLS BEFORE MODAL<<<', controls);
 		props.clicked(controls);
 		resetControlsValue();
 	};
